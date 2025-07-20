@@ -1,17 +1,13 @@
-package decode
+package internal
 
 import (
-	"avrojson/internal/read"
 	"path/filepath"
 	"testing"
 )
 
 func TestParse(t *testing.T) {
-
 	t.Run("empty file should give error", func(t *testing.T) {
-		// TODO: make it dynamic and generic for all internal packages
-		// to help with testing
-		data, err := read.SchemaFile(filepath.Join("..", "/", "read", "testdata", "empty.avro"))
+		data, err := SchemaFile(filepath.Join("testdata", "empty.avro"))
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -20,9 +16,7 @@ func TestParse(t *testing.T) {
 		}
 	})
 	t.Run("valid file should give schema", func(t *testing.T) {
-		// TODO: make it dynamic and generic for all internal packages
-		// to help with testing
-		data, err := read.SchemaFile(filepath.Join("..", "/", "read", "testdata", "basic.avro"))
+		data, err := SchemaFile(filepath.Join("testdata", "basic.avro"))
 		if err != nil {
 			t.Fatal(err)
 		}

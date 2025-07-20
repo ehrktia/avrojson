@@ -1,4 +1,4 @@
-package decode
+package internal
 
 import (
 	"fmt"

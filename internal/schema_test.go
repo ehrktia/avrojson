@@ -1,14 +1,13 @@
-package decode
+package internal
 
 import (
-	"avrojson/internal/read"
 	"encoding/json"
 	"path/filepath"
 	"testing"
 )
 
 func TestDecodeSchemaToJson(t *testing.T) {
-	data, err := read.SchemaFile(filepath.Join("..", "/", "read", "testdata", "basic.avro"))
+	data, err := SchemaFile(filepath.Join("testdata", "basic.avro"))
 	if err != nil {
 		t.Fatal(err)
 	}
