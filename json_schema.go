@@ -1,4 +1,4 @@
-package json2avro
+package avrojson
 
 import (
 	"encoding/json"
@@ -27,7 +27,7 @@ type Property struct {
 	Type        string `json:"type"`
 }
 
-func newJsonWrapper(avroData []byte) (*JsonWrapper, error) {
+func NewJsonWrapper(avroData []byte) (*JsonWrapper, error) {
 	js := newJsonSchema()
 	as := &AvroSchema{}
 	if len(avroData) < 1 {
