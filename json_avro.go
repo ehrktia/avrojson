@@ -1,4 +1,4 @@
-package json2avro
+package avrojson
 
 func TransferAvroToJson(avroData []byte) error {
 	jsw, err := newJsonWrapper(avroData)

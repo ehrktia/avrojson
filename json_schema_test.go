@@ -1,1 +1,1 @@
-package json2avro
+package avrojson

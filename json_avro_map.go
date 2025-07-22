@@ -1,4 +1,4 @@
-package json2avro
+package avrojson
 
 /*
 avro type	json type	example
