@@ -1,7 +1,6 @@
-package internal
+package json2avro
 
-// TODO: expose this as external interface
-func transferAvroToJson(avroData []byte) error {
+func TransferAvroToJson(avroData []byte) error {
 	jsw, err := newJsonWrapper(avroData)
 	if err != nil {
 		return err

@@ -1,4 +1,4 @@
-package internal
+package json2avro
 
 import (
 	"path/filepath"

@@ -1,4 +1,4 @@
-package internal
+package json2avro
 
 type AvroSchema struct {
 	Name        string        `json:"name,omitempty"`
