@@ -64,20 +64,37 @@ func TestJsonProperties(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	propertyList := make([]*Property, 0, len(jsw.AS.Fields))
-	for _, f := range jsw.AS.Fields {
-		p := &Property{
-			Name:        f.Name,
-			Description: f.Doc,
-			Type:        f.Type.(string),
-		}
-		propertyList = append(propertyList, p)
 
-	}
-	jsw.JS.Properties = propertyList
 	db, err := json.Marshal(jsw.JS)
 	if err != nil {
 		t.Fatal(err)
 	}
-	t.Logf("%s\n", db)
+	t.Logf("db:%s\n", db)
+
+	for _, v := range jsw.JS.Properties {
+		v.Type = avroJSONMap[v.Type]
+	}
+}
+
+func TestJSONAvroDataType(t *testing.T) {
+
+	avData, err := SchemaFile(filepath.Join("testdata", "basic.avro"))
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	jsw, err := newJsonWrapper(avData)
+	if err != nil {
+		t.Fatal(err)
+	}
+	jsonAvroDataTypeMap(jsw)
+	for _, v := range jsw.JS.Properties {
+		if v.Name == "timestamp" {
+			if v.Type != "integer" {
+				t.Fatal("expected integer\tgot v.Type")
+			}
+		}
+
+	}
+
 }

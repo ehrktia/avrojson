@@ -45,6 +45,25 @@ func newJsonWrapper(avroData []byte) (*JsonWrapper, error) {
 
 }
 
+func jsonAvroDataTypeMap(jsw *JsonWrapper) {
+	for _, v := range jsw.JS.Properties {
+		v.Type = avroJSONMap[v.Type]
+	}
+}
+
+func assignProperties(js *JSONSchema, as *AvroSchema) {
+	propertyList := make([]*Property, 0, len(as.Fields))
+	for _, f := range as.Fields {
+		p := &Property{
+			Name:        f.Name,
+			Description: f.Doc,
+			Type:        f.Type.(string),
+		}
+		propertyList = append(propertyList, p)
+	}
+	js.Properties = propertyList
+}
+
 const jsonSchema = `https://json-schema.org/draft/2020-12/schema`
 
 var id = fmt.Sprintf("https://example.com/data-%d.schema.json", rand.Int())
