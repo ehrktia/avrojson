@@ -1,6 +1,4 @@
-package decode
-
-import "encoding/json"
+package json2avro
 
 type AvroSchema struct {
 	Name        string        `json:"name,omitempty"`
@@ -13,12 +11,4 @@ type AvroSchema struct {
 	Aliases     []string      `json:"aliases,omitempty"`
 	Default     any           `json:"default,omitempty"`
 	LogicalType string        `json:"logicalType,omitempty"`
-}
-
-func StructToJson(data any) (string, error) {
-	jsonBytes, err := json.Marshal(data)
-	if err != nil {
-		return "", err
-	}
-	return string(jsonBytes), nil
 }

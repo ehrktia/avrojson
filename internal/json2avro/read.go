@@ -1,4 +1,4 @@
-package read
+package json2avro
 
 import (
 	"fmt"

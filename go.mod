@@ -1,4 +1,4 @@
-module avrojson
+module github.com/ehrktia/avrojson
 
 go 1.24.0
 
