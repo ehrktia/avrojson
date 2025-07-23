@@ -8,7 +8,7 @@ import (
 
 // read a schema file from location and emit it bytes and error
 
-func SchemaFile(location string) ([]byte, error) {
+func ReadSchemaFile(location string) ([]byte, error) {
 	if location == "" {
 		return nil, fmt.Errorf("invalid/empty file location received")
 	}
