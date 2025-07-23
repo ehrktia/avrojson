@@ -1,3 +1,11 @@
+This package is zero dependency avro schema to json schema. 
+
+it exposes `ReadSchemaFile` to consume the avro schema.
+
+`NewJsonWrapper` is a holder which manages the avro data bytes and new json
+
+schema. `CreateAvroToJson` is the final call to populate avro data in to the json schema file to a location provided.
+
 ### usage
 
 ```go
@@ -32,14 +40,9 @@ func main() {
 }
 ```
 
-
-
 output -pretty formatted
 
-
-
 ```json
-
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://example.com/data-6182600211311189528.schema.json",
