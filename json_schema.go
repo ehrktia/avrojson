@@ -6,12 +6,17 @@ import (
 	"math/rand"
 )
 
+// JsonWrapper is a wrapper which holds
+// skeleton for Json Schema and Avro Schema
+// data read from Avro schema provided for conversion
 type JsonWrapper struct {
 	JS       *JSONSchema
 	AS       *AvroSchema
 	AvroData []byte
 }
 
+// JSONSchema holds all required field to create
+// json schema
 type JSONSchema struct {
 	Schema      string      `json:"$schema"`
 	ID          string      `json:"$id"`
@@ -21,12 +26,15 @@ type JSONSchema struct {
 	Properties  []*Property `json:"properties"`
 }
 
+// Property holds the fields used in json schema
 type Property struct {
 	Name        string `json:"name"`
 	Description string `json:"description,omitempty"`
 	Type        string `json:"type"`
 }
 
+// NewJsonWrapper creates a json wrapper using the data from
+// provided avro file
 func NewJsonWrapper(avroData []byte) (*JsonWrapper, error) {
 	js := newJsonSchema()
 	as := &AvroSchema{}

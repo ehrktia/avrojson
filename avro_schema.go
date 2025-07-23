@@ -1,5 +1,6 @@
 package avrojson
 
+// AvroSchema holds information from avro schema
 type AvroSchema struct {
 	Name        string        `json:"name,omitempty"`
 	Type        any           `json:"type"`

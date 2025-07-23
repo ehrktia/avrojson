@@ -6,8 +6,8 @@ import (
 	"os"
 )
 
-// read a schema file from location and emit it bytes and error
-
+// ReadSchemaFile reads avro schema file from a location and emit it bytes along
+// with error in case when encountered
 func ReadSchemaFile(location string) ([]byte, error) {
 	if location == "" {
 		return nil, fmt.Errorf("invalid/empty file location received")
