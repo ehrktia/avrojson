@@ -5,6 +5,8 @@ import (
 	"os"
 )
 
+// CreateAvroToJson used to create json schema file from json wrapper.
+// the new json schema file is created in the fileName location supplied
 func CreateAvroToJson(jsw *JsonWrapper, fileName string) error {
 	assignProperties(jsw.JS, jsw.AS)
 	jsonAvroDataTypeMap(jsw)
@@ -24,5 +26,4 @@ func createJsonSchemFile(jsw *JsonWrapper, fileName string) error {
 		return err
 	}
 	return nil
-
 }
