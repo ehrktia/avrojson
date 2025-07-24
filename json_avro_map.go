@@ -15,7 +15,7 @@ map	object	{"a": 1}
 fixed	string	"\u00ff"
 */
 var avroJSONMap = map[string]string{
-	"null":    "null",
+	"null":    "object",
 	"boolean": "boolean",
 	"int":     "integer",
 	"long":    "integer",
