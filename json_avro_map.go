@@ -15,17 +15,23 @@ map	object	{"a": 1}
 fixed	string	"\u00ff"
 */
 var avroJSONMap = map[string]string{
-	"null":    "object",
-	"boolean": "boolean",
-	"int":     "integer",
-	"long":    "integer",
-	"float":   "number",
-	"double":  "number",
-	"bytes":   "string",
-	"string":  "string",
-	"record":  "object",
-	"enum":    "string",
-	"array":   "array",
-	"map":     "object",
-	"fixed":   "string",
+	"null":          "object",
+	"boolean":       "boolean",
+	"int":           "integer",
+	"long":          "integer",
+	"float":         "number",
+	"double":        "number",
+	"bytes":         "string",
+	"string":        "string",
+	"record":        "object",
+	"enum":          "string",
+	"array":         "array",
+	"map":           "object",
+	"fixed":         "string",
+	"interfacelist": "array",
+}
+
+type customDataType struct {
+	value    any
+	dataType string
 }

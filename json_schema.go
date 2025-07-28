@@ -52,16 +52,34 @@ func jsonAvroDataTypeMap(jsw *JsonWrapper) {
 }
 
 func assignProperties(js *JSONSchema, as *AvroSchema) {
-	propertyList := make([]*Property, 0, len(as.Fields))
-	for _, f := range as.Fields {
-		p := &Property{
-			Name:        f.Name,
-			Description: f.Doc,
-			Type:        f.Type.(string),
+	fmt.Printf("+++++++++++++++++:%d\n", len(as.Fields))
+	for _, v := range as.Fields {
+		fmt.Printf("name:%s\n", v.Name)
+		fmt.Printf("description:%s\n", v.Doc)
+		st, ok := v.Type.(string)
+		var cdt customDataType
+		if !ok {
+			st = "interfacelist"
+			cdt.value = v.Type
+			cdt.dataType = "interfacelist"
+			fmt.Printf("custom type:%s\n", avroJSONMap[cdt.dataType])
+			fmt.Printf("custom type:%v\n", cdt.value)
 		}
-		propertyList = append(propertyList, p)
+		fmt.Printf("type:%v\n", avroJSONMap[st])
+
+		fmt.Println("----------------------")
+
 	}
-	js.Properties = propertyList
+	// propertyList := make([]*Property, 0, len(as.Fields))
+	// for _, f := range as.Fields {
+	// 	p := &Property{
+	// 		Name:        f.Name,
+	// 		Description: f.Doc,
+	// 		Type:        f.Type.(string),
+	// 	}
+	// 	propertyList = append(propertyList, p)
+	// }
+	// js.Properties = propertyList
 }
 
 const jsonSchema = `https://json-schema.org/draft/2020-12/schema`

@@ -42,15 +42,32 @@ func TestNestedAvro(t *testing.T) {
 	if err := json.Unmarshal(data, a); err != nil {
 		t.Fatal(err)
 	}
+	// t.Logf("avro raw data:%#v\n", a)
 	ad, err := json.Marshal(a)
 	if err != nil {
 		t.Fatal(err)
+	}
+	// t.Logf("string value:%s\n", ad)
+	if err := json.Unmarshal(ad, a); err != nil {
+		t.Fatal(err)
+	}
+	// t.Logf("fields:%#v\n", a.Fields)
+	for _, v := range a.Fields {
+		t.Logf("name:%s\n", v.Name)
+		t.Logf("type:%s\n", v.Type)
+		tv, ok := v.Type.(string)
+		if !ok {
+			tv = "interfacelist"
+		}
+		mapValue := avroJSONMap[tv]
+		t.Logf("map value:%s\n", mapValue)
+		t.Log("-----------------")
 	}
 	jsw, err := NewJsonWrapper(ad)
 	if err != nil {
 		t.Fatal(err)
 	}
-	t.Logf("%v\n", jsw.JS)
+	assignProperties(jsw.JS, jsw.AS)
 	// cwd, err := os.Getwd()
 	// if err != nil {
 	// 	t.Fatal(err)
