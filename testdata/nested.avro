@@ -1,0 +1,37 @@
+{
+  "type": "record",
+  "name": "AvrosampleNetCore.AccountDetails",
+  "fields": [
+    {
+      "name": "AccountId",
+      "type": "int"
+    },
+    {
+      "name": "AccountName",
+      "type": "string"
+    },
+    {
+      "name": "Accounts",
+      "type": [
+        "null",
+        {
+          "type": "array",
+          "items": {
+            "type": "record",
+            "name": "AvrosampleNetCore.SubAccounts",
+            "fields": [
+              {
+                "name": "AccountId",
+                "type": "int"
+              },
+              {
+                "name": "AccountType",
+                "type": [ "null", "string" ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
