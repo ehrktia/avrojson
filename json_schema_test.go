@@ -1,6 +1,7 @@
 package avrojson
 
 import (
+	"bytes"
 	"encoding/json"
 	"os"
 	"path/filepath"
@@ -42,26 +43,12 @@ func TestNestedAvro(t *testing.T) {
 	if err := json.Unmarshal(data, a); err != nil {
 		t.Fatal(err)
 	}
-	// t.Logf("avro raw data:%#v\n", a)
 	ad, err := json.Marshal(a)
 	if err != nil {
 		t.Fatal(err)
 	}
-	// t.Logf("string value:%s\n", ad)
 	if err := json.Unmarshal(ad, a); err != nil {
 		t.Fatal(err)
-	}
-	// t.Logf("fields:%#v\n", a.Fields)
-	for _, v := range a.Fields {
-		t.Logf("name:%s\n", v.Name)
-		t.Logf("type:%s\n", v.Type)
-		tv, ok := v.Type.(string)
-		if !ok {
-			tv = "interfacelist"
-		}
-		mapValue := avroJSONMap[tv]
-		t.Logf("map value:%s\n", mapValue)
-		t.Log("-----------------")
 	}
 	jsw, err := NewJsonWrapper(ad)
 	if err != nil {
@@ -75,4 +62,20 @@ func TestNestedAvro(t *testing.T) {
 	// if err := CreateAvroToJson(jsw, filepath.Join(cwd, "nested.json")); err != nil {
 	// 	t.Fatal(err)
 	// }
+}
+
+func TestJsonUnMarshal(t *testing.T) {
+	data := `{"items":{"name":"AvrosampleNetCore.SubAccounts","type":"record","fields":[{"name":"AccountId","type":"int"},{"name":"AccountType","type":["null","string"]}]},"type":"array"}`
+	db := []byte(data)
+	var alv *ArrayList
+	if err := json.Unmarshal(db, &alv); err != nil {
+		t.Fatal(err)
+	}
+	result, err := json.Marshal(alv)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !bytes.Equal(db, result) {
+		t.Fatalf("expected:%s\ngot:%s\n", data, result)
+	}
 }

@@ -52,7 +52,6 @@ func jsonAvroDataTypeMap(jsw *JsonWrapper) {
 }
 
 func assignProperties(js *JSONSchema, as *AvroSchema) {
-	fmt.Printf("+++++++++++++++++:%d\n", len(as.Fields))
 	for _, v := range as.Fields {
 		fmt.Printf("name:%s\n", v.Name)
 		fmt.Printf("description:%s\n", v.Doc)
@@ -60,13 +59,47 @@ func assignProperties(js *JSONSchema, as *AvroSchema) {
 		var cdt customDataType
 		if !ok {
 			st = "interfacelist"
-			cdt.value = v.Type
+			db, err := json.Marshal(v.Type)
+			if err != nil {
+				fmt.Printf("unmarshal type error:%v\n", err)
+			}
+			cdt.value = db
 			cdt.dataType = "interfacelist"
-			fmt.Printf("custom type:%s\n", avroJSONMap[cdt.dataType])
-			fmt.Printf("custom type:%v\n", cdt.value)
+			// fmt.Printf("custom type:%s\n", avroJSONMap[cdt.dataType])
+			// ar := make([]*Property, 0)
+			jsonArray := []json.RawMessage{}
+			if err := json.Unmarshal(cdt.value, &jsonArray); err != nil {
+				fmt.Printf("unmarshal err:%v\n", err)
+			}
+			// fmt.Printf("len:%d\n", len(jsonArray))
+			// for _, v := range jsonArray {
+			// 	fmt.Printf("json array:%s\n", v)
+			// }
+			fmt.Printf("array value:%s\n", jsonArray[1])
+			// avData, err := json.Marshal(&jsonArray)
+			// if err != nil {
+			// 	fmt.Printf("err:%v\n", err)
+			// }
+			// av := &AvroArrayFields{}
+			// if err := json.Unmarshal(cdt.value, av); err != nil {
+			// 	fmt.Printf("avro err:%v\n", err)
+			// }
+			// av := &AvroArrayFields{}
+			// avm := map[string]any{}
+			var avm *map[string]any
+			if err := json.Unmarshal(jsonArray[1], &avm); err != nil {
+				fmt.Printf("unmarshal:%v\n", err)
+			}
+			for k, v := range *avm {
+				fmt.Println("----------------")
+				fmt.Printf("key:%s\n", k)
+				fmt.Printf("value:%v\n", v)
+				fmt.Println("----------------")
+
+			}
+
 		}
 		fmt.Printf("type:%v\n", avroJSONMap[st])
-
 		fmt.Println("----------------------")
 
 	}

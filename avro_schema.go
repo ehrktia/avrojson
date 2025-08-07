@@ -12,3 +12,21 @@ type AvroSchema struct {
 	Default     any           `json:"default,omitempty"`
 	LogicalType string        `json:"logicalType,omitempty"`
 }
+
+type Field struct {
+	Name        string `json:"name"`
+	Description string `json:"description,omitempty"`
+	Type        any    `json:"type"`
+}
+
+type Items struct {
+	Name        string  `json:"name"`
+	Type        any     `json:"type"`
+	Description string  `json:"description,omitempty"`
+	Fields      []Field `json:"fields,omitempty"`
+}
+
+type ArrayList struct {
+	ArrayItems Items `json:"items"`
+	Type       any   `json:"type"`
+}

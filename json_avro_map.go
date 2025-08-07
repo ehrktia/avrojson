@@ -32,6 +32,6 @@ var avroJSONMap = map[string]string{
 }
 
 type customDataType struct {
-	value    any
+	value    []byte
 	dataType string
 }
