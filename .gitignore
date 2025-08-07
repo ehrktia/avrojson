@@ -28,4 +28,4 @@ db/script/dev.sql
 bin/**
 google_oauth_token.json
 .git-metrics.toml
-result.json
+*.json
